@@ -32,13 +32,16 @@ class Tab
 		}
 		else
 		{
+			size++;
 			int * t = new int[size];
-			for(int i =0; i < size; i++)
+			for(int i =0; i < (size-1); i++)
 			{
 				t[i] = tab[i];
 			}
+			t[size-1] = number;
+
 			delete [] tab;
-			tab = new int[size+1];
+			tab = new int[size];
 			wsk = tab;
 			for(int i = 0; i < size; i++)
 			{
@@ -46,9 +49,6 @@ class Tab
 				wsk++;
 			}
 			delete [] t;
-			*wsk = number;
-			wsk++;
-			size++;
 		}
 	}
 
