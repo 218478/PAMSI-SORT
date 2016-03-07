@@ -1,7 +1,5 @@
 #include <iostream>
-#include <time.h>
-#include <sys/time.h>
-#include <ctime>
+#include "IRunnable.hpp"
 using namespace std;
 
 enum ExpandingType
@@ -11,23 +9,7 @@ enum ExpandingType
 	by_hundred
 };
 
-long GetTime()
-{
-	 struct timeval tv;
-
-	 gettimeofday(&tv, NULL);
-
-	 long ret = tv.tv_usec;
-	 /* Convert from micro seconds (10^-6) to milliseconds (10^-3) */
-	 ret /= 1000;
-
-	 /* Adds the seconds (10^0) after converting them to milliseconds (10^-3) */
-	 ret += (tv.tv_sec * 1000);
-
-	 return ret;
-}
-
-class Array
+class Array : public IRunnable
 {
 	long int arraySize;
 	long int numberOfElements;
@@ -46,7 +28,21 @@ class Array
 	{
 		delete [] array;
 	}
-
+	
+	public : virtual bool Prepare(int size)
+	{
+		Size = size;
+		return true;
+	}
+	
+	public : virtual bool Run()
+	{
+		for(int i = 0; i < Size; i++)
+		{
+			Add2(i);
+		}
+		return true;
+	}
 
 	private : void Add1(int value)
 	{
@@ -153,26 +149,3 @@ class Array
 	}
 
 };
-
-int main()
-{
-	int n;
-	ExpandingType expandingType = two_times;
-	long timeStart;
-	long timeEnd;
-
-	cout << "Podaj ilosc elementow: " << endl;
-	cin >> n;
-
-	Array tab1;
-
-	timeStart = GetTime();
-	for(int i=0; i < n; i++)
-	{
-		tab1.Add(expandingType, i);
-		//cout << "Tab1[" << i << "] : " << tab1.Display(i) << endl;
-	}
-	timeEnd = GetTime();
-
-	cout << "Execute time: " << (timeEnd-timeStart)/1000.0 << " s" << endl;
-}
