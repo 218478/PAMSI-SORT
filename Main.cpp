@@ -1,30 +1,48 @@
 #include <iostream>
-#include "IRunnable.hpp"
-#include "IStoper.hpp"
+#include "Array.hh"
+#include "TimeCounter.hh"
 using namespace std;
 
 int main()
 {
 	int size;
-	IRunnable runner = new Array();
-	IStoper stoper = new TimeCounter();
+	int laps;
+	long * times;
+	long averageTime = 0;
+	
+	Array *runner = new Array();
+	TimeCounter *stoper = new TimeCounter();
 	
 	cout << "Number of elements: ";
 	cin >> size;
 	
-	if(!runner.Prepare(size))
+	
+	cout << "Laps: ";
+	cin >> laps;
+	times = new long[laps];
+	
+	for(int i = 0; i < laps; i++)
 	{
-		cout << "Can't prepare runner." << endl;
-		return 0;
+		if(!runner->Prepare(size))
+		{
+			cout << "Can't prepare runner." << endl;
+			return 0;
+		}
+		stoper->Start();
+		if(!runner->Run())
+		{
+			cout << "Runner can't finish." << endl;
+			return 0;
+		}
+		stoper->Stop();
+		times[i] = stoper->GetElapsedTime();
 	}
 	
-	stoper.Start();
-	if(!runner.Run())
+	for(int i = 0; i < laps; i++)
 	{
-		cout << "Runner can't finish." << endl;
-		return 0;
+		cout << "Lap " << i << " : " << times[i]/1000.0 << " s" << endl;
+		averageTime += times[i];
 	}
-	stoper.Stop();
-	
-	cout << "Execution time: " << stoper.GetElapsedTime() << " s" << endl;
+	averageTime = averageTime/laps;
+	cout << "Average time: " << averageTime / 1000.0 << " s" << endl;
 }
