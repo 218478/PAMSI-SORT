@@ -24,6 +24,9 @@ protected:
 	
 	public : Array()
 	{
+		numberOfElements = 0;
+		arraySize = 10;
+		array = new type[arraySize];
 		ptr = array;
 	}
 	
@@ -40,6 +43,11 @@ protected:
 	public : virtual type Get(int index)
 	{
 		return array[index];
+	}
+	
+	public : virtual int GetNumberOfElements()
+	{
+		return numberOfElements;
 	}
 	
 	private : void Add1(type value)

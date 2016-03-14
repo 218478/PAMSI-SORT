@@ -6,13 +6,13 @@ bool ArrayRunner::Prepare(int size)
 	arraySize = 10;
 	array = new int[arraySize];
 	ptr = array;
-	Size = size;
+	MySize = size;
 	return true;
 }
 
 bool ArrayRunner::Run()
 {
-	for(int i = 0; i < Size; i++)
+	for(int i = 0; i < MySize; i++)
 	{
 		Add(i);
 		//cout << "Element" << i << " " << Get(i) << endl;

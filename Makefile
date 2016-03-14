@@ -1,9 +1,10 @@
 __start__: Program
 	./Program 
 
-Program: obj obj/Main.o obj/Array.o obj/TimeCounter.o obj/ArrayRunner.o
+Program: obj obj/Main.o obj/Array.o obj/TimeCounter.o obj/ArrayRunner.o\
+	 obj/Stack.o
 	g++ -o Program obj/Main.o obj/TimeCounter.o\
-			obj/ArrayRunner.o obj/Array.o
+			obj/ArrayRunner.o obj/Array.o obj/Stack.o
 
 obj:
 	mkdir obj
@@ -19,6 +20,9 @@ obj/ArrayRunner.o: ArrayRunner.cpp ArrayRunner.hh
 
 obj/Array.o: Array.cpp Array.hh
 	g++ -c -o obj/Array.o Array.cpp
+
+obj/Stack.o: Stack.cpp Stack.hh
+	g++ -c -o obj/Stack.o Stack.cpp
 
 clean:
 	rm -f obj/*.o Program

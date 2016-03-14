@@ -6,7 +6,8 @@ class IArray
 {
 public: 
 	virtual void Add(type item) = 0;
-	virtual type Get() {};
+	virtual type Get(int index) = 0;
+	virtual int GetNumberOfElements() = 0;
 };
 
 #endif

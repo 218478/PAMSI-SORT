@@ -3,7 +3,7 @@
 
 class IRunnable
 {
-	protected : int Size;
+	protected : int MySize;
 	
 	public : virtual bool Prepare(int size) = 0;
 	public : virtual bool Run() = 0;

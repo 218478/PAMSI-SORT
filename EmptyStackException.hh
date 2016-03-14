@@ -6,7 +6,8 @@
 class EmptyStackException
 {
 public: 
-	EmptyStackException(){ cout << "EmptyStackException" << endl; }
+	EmptyStackException(){}
+	void Show() { cout << "EmptyStackException" << endl; }
 };
 
 #endif

@@ -1,11 +1,12 @@
 #include <iostream>
 #include "ArrayRunner.hh"
 #include "TimeCounter.hh"
+#include "Stack.hh"
 using namespace std;
 
 int main()
 {
-	int size;
+	/*int size;
 	int laps = 10;
 	long * times = new long[laps];;
 	long averageTime = 0;
@@ -40,4 +41,27 @@ int main()
 	}
 	averageTime = averageTime/laps;
 	cout << "Average time: " << averageTime / 1000.0 << " s" << endl;
+	
+	cout << "Runner size: " << runner->GetNumberOfElements() << endl;*/
+	
+	Stack<int> *myStack = new Stack<int>();
+	
+	cout << "Is empty? " << myStack->IsEmpty() << endl;
+	cout << "Elements : " << myStack->Size() << endl;
+	
+	for(int i = 0; i < 5; i++)
+	{
+		myStack->Push(i);
+		cout << "Pushed: " << myStack->Top() << endl;
+	}
+	cout << "Is empty? " << myStack->IsEmpty() << endl;
+	cout << "Elements : " << myStack->Size() << endl;
+	
+	for(int i = 0; i < 7; i++)
+	{
+		cout << "Poped: " << myStack->Pop() << endl;
+	}
+	cout << "Is empty? " << myStack->IsEmpty() << endl;
+	cout << "Elements : " << myStack->Size() << endl;
+	
 }

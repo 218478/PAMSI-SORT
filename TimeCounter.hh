@@ -39,7 +39,7 @@ class TimeCounter : public IStoper
 	
 	public : virtual bool DumpToFile()
 	{
-		return true;
+		return false;
 	}
 	
 	private : long GetTime()
