@@ -1,25 +1,20 @@
 #include <iostream>
-#include "Array.hh"
+#include "ArrayRunner.hh"
 #include "TimeCounter.hh"
 using namespace std;
 
 int main()
 {
 	int size;
-	int laps;
-	long * times;
+	int laps = 10;
+	long * times = new long[laps];;
 	long averageTime = 0;
 	
-	Array *runner = new Array();
+	ArrayRunner *runner = new ArrayRunner();
 	TimeCounter *stoper = new TimeCounter();
 	
 	cout << "Number of elements: ";
 	cin >> size;
-	
-	
-	cout << "Laps: ";
-	cin >> laps;
-	times = new long[laps];
 	
 	for(int i = 0; i < laps; i++)
 	{
@@ -40,7 +35,7 @@ int main()
 	
 	for(int i = 0; i < laps; i++)
 	{
-		cout << "Lap " << i << " : " << times[i]/1000.0 << " s" << endl;
+		cout << "Lap " << (i+1) << " : " << times[i]/1000.0 << " s" << endl;
 		averageTime += times[i];
 	}
 	averageTime = averageTime/laps;

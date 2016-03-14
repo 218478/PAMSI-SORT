@@ -2,7 +2,7 @@
 #define Array_HH
 
 #include <iostream>
-#include "IRunnable.hh"
+#include "IArray.hh"
 using namespace std;
 
 enum ExpandingType
@@ -13,18 +13,17 @@ enum ExpandingType
 	one_and_half_times
 };
 
-class Array : public IRunnable
+template < typename type >
+class Array : public IArray<type>
 {
+protected:
 	long int arraySize;
 	long int numberOfElements;
-	int * array;
-	int * ptr;
-
+	type * array;
+	type * ptr;	
+	
 	public : Array()
 	{
-		numberOfElements = 0;
-		arraySize = 10;
-		array = new int[arraySize];
 		ptr = array;
 	}
 	
@@ -33,28 +32,17 @@ class Array : public IRunnable
 		delete [] array;
 	}
 	
-	public : virtual bool Prepare(int size)
+	public : virtual void Add(type value)
 	{
-		numberOfElements = 0;
-		arraySize = 10;
-		array = new int[arraySize];
-		ptr = array;
-		Size = size;
-		return true;
-	}
-	
-	public : virtual bool Run()
-	{
-		for(int i = 0; i < Size; i++)
-		{
-			Add4(i);
-			//cout << "Element" << i << " " << Display(i) << endl;
-		}
-		delete [] array;
-		return true;
+		Add2(value);
 	}
 
-	private : void Add1(int value)
+	public : virtual type Get(int index)
+	{
+		return array[index];
+	}
+	
+	private : void Add1(type value)
 	{
 		if(numberOfElements < arraySize)
 		{
@@ -64,7 +52,7 @@ class Array : public IRunnable
 		else
 		{
 			arraySize++;
-			int * tempArray = new int[arraySize];
+			type * tempArray = new type[arraySize];
 			for(int i = 0; i < arraySize-1; i++)
 			{
 				tempArray[i] = array[i];
@@ -77,7 +65,7 @@ class Array : public IRunnable
 		numberOfElements++;
 	}
 
-	private : void Add2(int value)
+	private : void Add2(type value)
 	{
 		if(numberOfElements < arraySize)
 		{
@@ -87,7 +75,7 @@ class Array : public IRunnable
 		else
 		{
 			arraySize*=2;
-			int * tempArray = new int[arraySize];
+			type * tempArray = new type[arraySize];
 			for(int i = 0; i < (arraySize/2); i++)
 			{
 				tempArray[i] = array[i];
@@ -101,7 +89,7 @@ class Array : public IRunnable
 		numberOfElements++;
 	}
 
-	private : void Add3(int value)
+	private : void Add3(type value)
 	{
 		if(numberOfElements < arraySize)
 		{
@@ -111,7 +99,7 @@ class Array : public IRunnable
 		else
 		{
 			arraySize += 100;
-			int * tempArray = new int[arraySize];
+			type * tempArray = new type[arraySize];
 			for(int i = 0; i < arraySize-100; i++)
 			{
 				tempArray[i] = array[i];
@@ -125,7 +113,7 @@ class Array : public IRunnable
 		numberOfElements++;
 	}
 	
-	private : void Add4(int value)
+	private : void Add4(type value)
 		{
 			if(numberOfElements < arraySize)
 			{
@@ -135,7 +123,7 @@ class Array : public IRunnable
 			else
 			{
 				arraySize*=1.5;
-				int * tempArray = new int[arraySize];
+				type * tempArray = new type[arraySize];
 				for(int i = 0; i < (arraySize/2); i++)
 				{
 					tempArray[i] = array[i];
@@ -150,7 +138,7 @@ class Array : public IRunnable
 		}
 
 
-	public : void Add(ExpandingType expandingType, int value)
+	public : void Add(ExpandingType expandingType, type value)
 	{
 		switch (expandingType)
 		{
@@ -169,23 +157,8 @@ class Array : public IRunnable
 		default:
 			cout << "Wrong expanding type!" << endl;
 			break;
-
 		}
 	}
-
-	public : int Display(int i)
-	{
-		return array[i];
-	}
-
-	public : void DisplayAll()
-	{
-		for(int i = 0; i < arraySize; i++)
-		{
-			cout << "Array[" << i << "] = " << array[i] << endl;
-		}
-	}
-
 };
 
 #endif

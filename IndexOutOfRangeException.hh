@@ -6,7 +6,10 @@
 class IndexOutOfRangeException
 {
 public: 
-	IndexOutOfRangeException(){ cout << "IndexOutOfRange Exception" << endl; }
+	IndexOutOfRangeException()
+	{ 
+		cout << "Index Out Of Range Exception" << endl; 
+	}
 };
 
 #endif
