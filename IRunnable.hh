@@ -3,10 +3,10 @@
 
 class IRunnable
 {
-	public : int Size;
+	protected : int Size;
 	
-	public : virtual bool Prepare(int size) {};
-	public : virtual bool Run() {};
+	public : virtual bool Prepare(int size) = 0;
+	public : virtual bool Run() = 0;
 };
 
 #endif

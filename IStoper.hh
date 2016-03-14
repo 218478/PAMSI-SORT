@@ -3,10 +3,10 @@
 
 class IStoper
 {
-	public : virtual void Start() {};
-	public : virtual void Stop() {};
-	public : virtual long GetElapsedTime() {};
-	public : virtual bool DumpToFile() {};
+	public : virtual void Start() = 0;
+	public : virtual void Stop() = 0;
+	public : virtual long GetElapsedTime() = 0;
+	public : virtual bool DumpToFile() = 0;
 };
 
 #endif

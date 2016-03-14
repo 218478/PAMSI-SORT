@@ -5,13 +5,11 @@ template < typename type >
 class IQueue
 {	
 public: 
-	virtual void Enqueue(type item);
-	virtual type Dequeue()
-				throw(EmptyQueueException);
-	virtual type Front();
-				throw(EmptyQueueException);
-	virtual int Size();
-	virtual bool IsEmpty();
+	virtual void Enqueue(type item) = 0;
+	virtual type Dequeue() throw(EmptyQueueException) = 0;
+	virtual type Front() throw(EmptyQueueException) = 0;
+	virtual int Size() = 0;
+	virtual bool IsEmpty() = 0;
 };
 
 #endif

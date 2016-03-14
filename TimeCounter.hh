@@ -37,6 +37,11 @@ class TimeCounter : public IStoper
 		}
 	}
 	
+	public : virtual bool DumpToFile()
+	{
+		return true;
+	}
+	
 	private : long GetTime()
 	{
 		 struct timeval tv;

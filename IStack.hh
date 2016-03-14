@@ -5,13 +5,11 @@ template < typename type >
 class IStack
 {
 public: 
-	virtual void Push(type item);
-	virtual type Pop() 
-				throw(EmptyStackException);
-	virtual type Top()
-				throw(EmptyStackException);
-	virtual int Size();
-	virtual bool IsEmpty();
+	virtual void Push(type item) = 0;
+	virtual type Pop() throw(EmptyStackException) = 0;
+	virtual type Top() throw(EmptyStackException) = 0;
+	virtual int Size() = 0;
+	virtual bool IsEmpty() = 0;
 };
 
 #endif
