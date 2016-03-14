@@ -5,9 +5,12 @@ template < typename type >
 class IList
 {
 public: 
-	virtual void Add(type item, int index);
-	virtual void Remove(int index);
-	virtual type Get(int index);
+	virtual void Add(type item, int index)
+				throw(IndexOutOfRangeException);
+	virtual void Remove(int index)
+				throw(IndexOutOfRangeException);
+	virtual type Get(int index)
+				throw(IndexOutOfRangeException);
 	virtual int Size();
 	virtual bool IsEmpty();
 };
