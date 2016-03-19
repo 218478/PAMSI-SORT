@@ -45,6 +45,11 @@ protected:
 		return array[index];
 	}
 	
+	public : virtual void Set(type item, int index)
+	{
+		array[index] = item;
+	}
+	
 	public : virtual int GetNumberOfElements()
 	{
 		return numberOfElements;

@@ -19,10 +19,23 @@ public:
 		actualIndex = -1;
 	}
 	
+	~Stack()
+	{
+		delete stackArray;
+	}
+	
 	virtual void Push(type item)
 	{
-		actualIndex++;
-		stackArray->Add(item);
+		if(Size() < stackArray->GetNumberOfElements())
+		{
+			actualIndex++;
+			stackArray->Set(item, actualIndex);
+		}
+		else
+		{
+			actualIndex++;
+			stackArray->Add(item);			
+		}
 	}
 	
 	virtual type Pop() throw(EmptyStackException)
@@ -60,6 +73,14 @@ public:
 	virtual bool IsEmpty()
 	{
 		return (actualIndex < 0);
+	}
+	
+	void ShowStack()
+	{
+		for(int i=0; i<Size(); i++)
+		{
+			cout << "Element" << i << " : " << stackArray->Get(i) << endl;
+		}
 	}
 };
 

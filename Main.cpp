@@ -1,7 +1,7 @@
 #include <iostream>
 #include "ArrayRunner.hh"
 #include "TimeCounter.hh"
-#include "Stack.hh"
+#include "Queue.hh"
 using namespace std;
 
 int main()
@@ -44,24 +44,42 @@ int main()
 	
 	cout << "Runner size: " << runner->GetNumberOfElements() << endl;*/
 	
-	Stack<int> *myStack = new Stack<int>();
+	Queue<int> *myQueue = new Queue<int>();
+
+	cout << "START" << endl;
+	cout << "IsEmpty? " << myQueue->IsEmpty() << endl;
+	myQueue->ShowQueue();
 	
-	cout << "Is empty? " << myStack->IsEmpty() << endl;
-	cout << "Elements : " << myStack->Size() << endl;
-	
+	cout << endl << "Add 5 elements" << endl;
 	for(int i = 0; i < 5; i++)
 	{
-		myStack->Push(i);
-		cout << "Pushed: " << myStack->Top() << endl;
+		myQueue->Enqueue(i);
 	}
-	cout << "Is empty? " << myStack->IsEmpty() << endl;
-	cout << "Elements : " << myStack->Size() << endl;
-	
-	for(int i = 0; i < 7; i++)
+	cout << "IsEmpty? " << myQueue->IsEmpty() << endl;
+	myQueue->ShowQueue();
+
+	cout << endl << "remove 2 elements" << endl;
+	for(int i = 0; i < 2; i++)
 	{
-		cout << "Poped: " << myStack->Pop() << endl;
+		myQueue->Dequeue();
 	}
-	cout << "Is empty? " << myStack->IsEmpty() << endl;
-	cout << "Elements : " << myStack->Size() << endl;
+	cout << "IsEmpty? " << myQueue->IsEmpty() << endl;
+	myQueue->ShowQueue();
+	
+	cout << endl << "Add 5 elements" << endl;
+	for(int i = 0; i < 5; i++)
+	{
+		myQueue->Enqueue(i);
+	}
+	cout << "IsEmpty? " << myQueue->IsEmpty() << endl;
+	myQueue->ShowQueue();
+	
+	cout << endl << "remove 3 elements" << endl;
+	for(int i = 0; i < 3; i++)
+	{
+		myQueue->Dequeue();
+	}
+	cout << "IsEmpty? " << myQueue->IsEmpty() << endl;
+	myQueue->ShowQueue();
 	
 }

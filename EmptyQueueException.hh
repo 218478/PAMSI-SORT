@@ -6,7 +6,8 @@
 class EmptyQueueException
 {
 public: 
-	EmptyQueueException(){ cout << "Empty Queue Exception" << endl; }
+	EmptyQueueException(){}
+	void Show() { cout << "Empty Queue Exception" << endl; }
 };
 
 #endif
