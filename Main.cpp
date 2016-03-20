@@ -1,31 +1,46 @@
 #include <iostream>
+#include <string>
+#include <fstream>
+#include <cstdlib>
+#include <ctime>
 #include "ArrayRunner.hh"
 #include "TimeCounter.hh"
-#include "Queue.hh"
+#include "ListTest.hh"
 using namespace std;
 
 int main()
 {
-	/*int size;
+	int size;
 	int laps = 10;
 	long * times = new long[laps];;
 	long averageTime = 0;
 	
-	ArrayRunner *runner = new ArrayRunner();
-	TimeCounter *stoper = new TimeCounter();
-	
 	cout << "Number of elements: ";
 	cin >> size;
 	
+	string myString[size];
+	
+	ifstream file("words.txt");
+	for(int i = 0; i < size; i++)
+	{
+		file >> myString[i];
+	}
+	
+	ListTest *runner = new ListTest(myString);
+	TimeCounter *stoper = new TimeCounter();
+
+	if(!runner->Prepare(size))
+	{
+		cout << "Can't prepare runner." << endl;
+		return 0;
+	}
+	srand(time(NULL));	
 	for(int i = 0; i < laps; i++)
 	{
-		if(!runner->Prepare(size))
-		{
-			cout << "Can't prepare runner." << endl;
-			return 0;
-		}
 		stoper->Start();
-		if(!runner->Run())
+		string wordToFind = myString[rand() % size];
+		cout << "Finding word " << wordToFind << endl;
+		if(!runner->Run(wordToFind))
 		{
 			cout << "Runner can't finish." << endl;
 			return 0;
@@ -42,44 +57,7 @@ int main()
 	averageTime = averageTime/laps;
 	cout << "Average time: " << averageTime / 1000.0 << " s" << endl;
 	
-	cout << "Runner size: " << runner->GetNumberOfElements() << endl;*/
+	//cout << "Runner size: " << runner->GetNumberOfElements() << endl;
 	
-	Queue<int> *myQueue = new Queue<int>();
-
-	cout << "START" << endl;
-	cout << "IsEmpty? " << myQueue->IsEmpty() << endl;
-	myQueue->ShowQueue();
-	
-	cout << endl << "Add 5 elements" << endl;
-	for(int i = 0; i < 5; i++)
-	{
-		myQueue->Enqueue(i);
-	}
-	cout << "IsEmpty? " << myQueue->IsEmpty() << endl;
-	myQueue->ShowQueue();
-
-	cout << endl << "remove 2 elements" << endl;
-	for(int i = 0; i < 2; i++)
-	{
-		myQueue->Dequeue();
-	}
-	cout << "IsEmpty? " << myQueue->IsEmpty() << endl;
-	myQueue->ShowQueue();
-	
-	cout << endl << "Add 5 elements" << endl;
-	for(int i = 0; i < 5; i++)
-	{
-		myQueue->Enqueue(i);
-	}
-	cout << "IsEmpty? " << myQueue->IsEmpty() << endl;
-	myQueue->ShowQueue();
-	
-	cout << endl << "remove 3 elements" << endl;
-	for(int i = 0; i < 3; i++)
-	{
-		myQueue->Dequeue();
-	}
-	cout << "IsEmpty? " << myQueue->IsEmpty() << endl;
-	myQueue->ShowQueue();
 	
 }
