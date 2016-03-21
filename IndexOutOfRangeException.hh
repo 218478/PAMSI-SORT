@@ -6,7 +6,8 @@
 class IndexOutOfRangeException
 {
 public: 
-	IndexOutOfRangeException()
+	IndexOutOfRangeException() {}
+	void Show()
 	{ 
 		cout << "Index Out Of Range Exception" << endl; 
 	}
