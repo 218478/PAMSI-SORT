@@ -1,1 +1,1 @@
-test sklonowanego repo
+test sklonowanego repo, poprawka nazwy uzytkownika
