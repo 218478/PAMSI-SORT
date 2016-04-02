@@ -2,7 +2,7 @@
 #define IStack_HH
 
 /*! Interface describes the basic operations on the stack of different type. 
- * User have to define type of the stack*/
+  User have to define type of the stack*/
 template < typename type >
 class IStack
 {

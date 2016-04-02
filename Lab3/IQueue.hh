@@ -2,7 +2,7 @@
 #define IQueue_HH
 
 /*! Interface describes the basic operations on the queue of different type. 
- * User have to define type of the queue*/
+  User have to define type of the queue*/
 template < typename type >
 class IQueue
 {	

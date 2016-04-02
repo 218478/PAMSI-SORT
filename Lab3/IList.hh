@@ -2,7 +2,7 @@
 #define IList_HH
 
 /*! Interface describes the basic operations on the list of different type. 
- * User have to define type of the list*/
+  User have to define type of the list*/
 template < typename type >
 class IList
 {
