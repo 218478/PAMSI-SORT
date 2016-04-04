@@ -2,6 +2,7 @@
 #define Array_HH
 
 #include <iostream>
+#include <cstdlib>  // to deal with pseudo-randomness
 #include "IArray.hh"
 using namespace std;
 
@@ -54,6 +55,31 @@ protected:
 	{
 		return numberOfElements;
 	}
+
+ private : void QuickSortImplementation(int tablica[], int lewy, int prawy) {
+
+   int pivot=tablica[(lewy+prawy)/2];
+   int i,j,x;
+   i=lewy;
+   j=prawy;
+   do{
+     while (tablica[i]<pivot) i++;
+     while (tablica[j]>pivot) j--;
+     if (i<=j){
+       x=tablica[i];
+       tablica[i]=tablica[j];
+       tablica[j]=x;
+       i++; j--;
+     }
+   }while (i<=j);
+   if (j>lewy) QuickSortImplementation(tablica,lewy, j);
+   if (i<prawy) QuickSortImplementation(tablica, i, prawy);
+   
+ }
+  
+ public : void QuickSort() {
+   QuickSortImplementation( array, 0, GetNumberOfElements()-1 );
+ }
 	
 	private : void Add1(type value)
 	{
