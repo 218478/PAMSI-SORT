@@ -68,6 +68,7 @@ int main()
   Queue<int> data_sizes;
   QuickSortArray quick_sort_test;
   MergeSortArray merge_sort_test;
+  int trials_count = 50;
 
   data_sizes.Enqueue(10);
   data_sizes.Enqueue(100);
@@ -78,28 +79,42 @@ int main()
   // for debug
   //  data_sizes.ShowQueue();
 
-  TimeCounter *stoper = new TimeCounter();
+
+
+  // Wazne !!!! Jezeli stworzysz stoper na stercie (uzyjesz alokacji
+  // 'new' i ateriksa '*' to nie mozesz wielokrotnie zapisywac do pliku
+  // ustawia sie failbit przy tej metodzie.
+  TimeCounter stoper;
 
   while (!data_sizes.IsEmpty()) {
     std::ostringstream ss_quick_sort;
     std::ostringstream ss_merge_sort;
     int rozmiar = data_sizes.Dequeue();
 
-    // quick sort part
-    ss_quick_sort << "results/QuickSort_" << rozmiar;
-    stoper->Start();
-    quick_sort_test.Prepare(rozmiar);
-    quick_sort_test.Run();
-    stoper->Stop();
-    stoper->DumpToFile(ss_quick_sort.str());
+    for (int i = 0; i < trials_count; i++) {
+      // quick sort part
+      ss_quick_sort << "./results/QuickSortResult_Pessimistic_" << rozmiar;
+      quick_sort_test.Prepare(rozmiar);
+      stoper.Start();
+      quick_sort_test.Run();
+      stoper.Stop();
+      stoper.DumpToFile(ss_quick_sort.str());
+      std::cout << i << std::endl;
 
-    // merge sort part
-    ss_merge_sort << "results/MergeSort_" << rozmiar;
-    stoper->Start();
-    merge_sort_test.Prepare(rozmiar);
-    merge_sort_test.Run();
-    stoper->Stop();
-    stoper->DumpToFile(ss_merge_sort.str());
-}
+      // // merge sort part
+      // ss_merge_sort << "./results/MergeSortResult_" << rozmiar;
+      // merge_sort_test.Prepare(rozmiar);
+      // stoper.Start();
+      // merge_sort_test.Run();
+      // stoper.Stop();
+      // stoper.DumpToFile(ss_merge_sort.str());
+
+      // clearing the contents of ostringstreams
+      ss_quick_sort.str("");
+      ss_quick_sort.clear();
+      // ss_merge_sort.str("");
+      // ss_merge_sort.clear();
+    }
+  }
   return 0;
 }

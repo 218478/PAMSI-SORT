@@ -49,7 +49,7 @@ class TimeCounter : public IStoper
               my_file.exceptions(my_file.failbit);
             }
             catch(const std::ios_base::failure& ex) {
-              std::cerr << "Error! Couldn't find or open a file" << ex.what()
+              std::cerr << "Error! Couldn't find or open a file, because:\n\t" << ex.what()
                         << std::endl;
             }
 

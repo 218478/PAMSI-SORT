@@ -10,6 +10,7 @@ bool QuickSortArray::Prepare(int size) {
   for (int i = 0; i < size; i++)  // adding with doubling array size
     tablica.Add(alloc_type, static_cast<int>(rand()));
 
+  std::cout << tablica.MinimumElement() << std::endl;
   return true;
 }
 

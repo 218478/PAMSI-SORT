@@ -1,0 +1,119 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\author{Kamil Kuczaj}
+\title{Sprawozdanie z Laboratorium 5 - Pomiar czasu sortowaniu przy użyciu dwóch algorytmów - QuickSort oraz MergeSort.}
+\date{\today}
+\begin{document}
+
+\maketitle
+
+\section{Wstęp}
+Podanym zadaniem był pomiar czasu znajdywania losowego elementu listy typu\textit{string}. Należało wykonać pomiary zapisu: $10^1$, $10^3$, $10^5$, $10^6$ oraz $10^9$. Niestety przy próbie załadowania do tablicy $10^9$ elementów komputer zatrzymywał się na wielkości 6 GB zużytej pamięci RAM i nie chciał alokować dalszej pamięci. Pomimo włączonego pliku stronicowania, który wielkością odpowiada ilości pamięci fizycznej w komputerze nie mogłem naprawić tego problemu. Podane dalej pomiary będą uwzględniać pomiary jedynie dochodzące do $10^6$ elementów.\\\\Nie byłem w stanie określić czasu szybkiego sortowania w przypadku pesymistycznym, gdyż gdzieś pojawił mi się nieoczekiwany błąd. Otóż pamięć alokowała się w nieskończoność powodując zatrzymanie pracy komputera (\textit{freeze)}.
+
+\section{Specyfikacja komputera}
+
+\begin{center}
+	\begin{tabular}{| r | c |}
+	\hline
+	Wersja kompilatora \textit{g++} & 4.8.4 \\ \hline
+	System & Ubuntu 14.04.4 \\ \hline
+	Procesor	 & Intel Core i5 2510M 2.3 GHz \\ \hline
+	Pamięć RAM & 8 GB DDR3 1600 MHz \\ \hline
+	Rozmiar zmiennej \textit{int} & 4 bajty \\ \hline
+	\end{tabular}
+\end{center}
+\newpage	
+
+\section{Pomiary oraz ich interpretacja}
+\bigskip
+
+\begin{table}[htbp]
+\caption{Wyniki pomiarów i ich średnie arytmetyczne.}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\multicolumn{ 4}{|c|}{\textbf{MergeSort}} & \textbf{} & \multicolumn{ 4}{c|}{\textbf{QuickSort}} \\ \hline
+\textbf{100} & \textbf{1000} & \textbf{100000} & \textbf{1000000} & \textbf{} & \textbf{100} & \textbf{1000} & \textbf{100000} & \textbf{1000000} \\ \hline
+0 & 0 & 1 & 337 &  & 0 & 0 & 1 & 189 \\ \hline
+0 & 0 & 1 & 482 &  & 0 & 0 & 0 & 540 \\ \hline
+0 & 0 & 1 & 691 &  & 0 & 0 & 1 & 473 \\ \hline
+0 & 0 & 1 & 947 &  & 0 & 0 & 1 & 628 \\ \hline
+0 & 1 & 2 & 1118 &  & 0 & 0 & 1 & 760 \\ \hline
+0 & 0 & 1 & 1274 &  & 0 & 0 & 1 & 1175 \\ \hline
+0 & 0 & 2 & 1466 &  & 0 & 0 & 1 & 1221 \\ \hline
+0 & 0 & 2 & 1676 &  & 0 & 0 & 1 & 1352 \\ \hline
+0 & 1 & 2 & 1877 &  & 0 & 0 & 1 & 1423 \\ \hline
+0 & 0 & 2 & 2166 &  & 0 & 0 & 1 & 1556 \\ \hline
+0 & 0 & 2 & 2288 &  & 0 & 0 & 1 & 1658 \\ \hline
+0 & 1 & 2 & 2492 &  & 0 & 0 & 2 & 1743 \\ \hline
+0 & 0 & 2 & 2691 &  & 0 & 0 & 2 & 2070 \\ \hline
+0 & 0 & 2 & 2897 &  & 0 & 0 & 2 & 2219 \\ \hline
+0 & 1 & 3 & 3105 &  & 0 & 0 & 2 & 2276 \\ \hline
+0 & 0 & 2 & 3299 &  & 0 & 0 & 1 & 2444 \\ \hline
+0 & 0 & 3 & 3501 &  & 0 & 0 & 2 & 2658 \\ \hline
+0 & 0 & 3 & 3721 &  & 0 & 1 & 2 & 2830 \\ \hline
+0 & 0 & 3 & 3932 &  & 0 & 0 & 2 & 2918 \\ \hline
+0 & 1 & 4 & 4156 &  & 0 & 0 & 2 & 3013 \\ \hline
+0 & 0 & 4 & 4348 &  & 0 & 0 & 2 & 3096 \\ \hline
+0 & 1 & 4 & 4589 &  & 0 & 0 & 1 & 3229 \\ \hline
+0 & 0 & 5 & 4870 &  & 0 & 0 & 2 & 3367 \\ \hline
+\textbf{0,02} & \textbf{0,44} & \textbf{4,44} & \textbf{5533,5} & \textbf{T [ms]} & \textbf{0} & \textbf{0,12} & \textbf{2,12} & \textbf{3791,64} \\ \hline
+\end{tabular}
+\end{center}
+\label{Wyniki1}
+\end{table}
+
+\begin{table}[htbp]
+\caption{Wyniki pomiarów i ich średnie arytmetyczne.}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\multicolumn{ 4}{|c|}{\textbf{MergeSort}} & \textbf{} & \multicolumn{ 4}{c|}{\textbf{QuickSort}} \\ \hline
+\textbf{100} & \textbf{1000} & \textbf{100000} & \textbf{1000000} & \textbf{} & \textbf{100} & \textbf{1000} & \textbf{100000} & \textbf{1000000} \\ \hline
+0 & 1 & 4 & 5047 &  & 0 & 0 & 2 & 3436 \\ \hline
+0 & 0 & 4 & 5251 &  & 0 & 0 & 2 & 3734 \\ \hline
+0 & 1 & 5 & 5501 &  & 0 & 0 & 2 & 3792 \\ \hline
+0 & 1 & 4 & 5658 &  & 0 & 0 & 2 & 3958 \\ \hline
+0 & 0 & 4 & 5924 &  & 0 & 0 & 3 & 4245 \\ \hline
+0 & 1 & 4 & 6073 &  & 0 & 0 & 3 & 4347 \\ \hline
+0 & 0 & 5 & 6287 &  & 0 & 0 & 3 & 4458 \\ \hline
+0 & 0 & 6 & 6453 &  & 0 & 1 & 2 & 4545 \\ \hline
+0 & 1 & 6 & 6710 &  & 0 & 0 & 2 & 4618 \\ \hline
+0 & 0 & 6 & 6875 &  & 0 & 0 & 2 & 4760 \\ \hline
+0 & 0 & 6 & 7101 &  & 0 & 1 & 2 & 4842 \\ \hline
+0 & 1 & 6 & 7341 &  & 0 & 0 & 3 & 4967 \\ \hline
+0 & 1 & 6 & 7577 &  & 0 & 0 & 3 & 5018 \\ \hline
+0 & 0 & 7 & 7801 &  & 0 & 0 & 3 & 5144 \\ \hline
+0 & 0 & 6 & 8119 &  & 0 & 1 & 3 & 5254 \\ \hline
+0 & 1 & 6 & 8299 &  & 0 & 0 & 3 & 5375 \\ \hline
+0 & 1 & 7 & 8714 &  & 0 & 0 & 3 & 5913 \\ \hline
+0 & 0 & 7 & 10785 &  & 0 & 0 & 3 & 6348 \\ \hline
+0 & 0 & 7 & 9320 &  & 0 & 1 & 3 & 6788 \\ \hline
+0 & 0 & 7 & 9805 &  & 0 & 1 & 3 & 6652 \\ \hline
+0 & 1 & 8 & 10867 &  & 0 & 0 & 3 & 6712 \\ \hline
+0 & 1 & 8 & 10646 &  & 0 & 0 & 3 & 7261 \\ \hline
+0 & 1 & 8 & 9796 &  & 0 & 0 & 3 & 6715 \\ \hline
+0 & 1 & 7 & 9954 &  & 0 & 0 & 3 & 6804 \\ \hline
+1 & 1 & 8 & 10232 &  & 0 & 0 & 3 & 6716 \\ \hline
+0 & 1 & 7 & 11878 &  & 0 & 0 & 3 & 6835 \\ \hline
+0 & 1 & 9 & 10738 &  & 0 & 0 & 4 & 7507 \\ \hline
+\textbf{0,02} & \textbf{0,44} & \textbf{4,44} & \textbf{5533,5} & \textbf{T [ms]} & \textbf{0} & \textbf{0,12} & \textbf{2,12} & \textbf{3791,64} \\ \hline
+\end{tabular}
+\end{center}
+\label{Wyniki2}
+\end{table}
+
+\newpage
+
+
+Czasy pomiarów obu metod wydłużają się wraz ze wzrostem numeru próby. Być może jest to spowodowane tym jak Linux radzi sobie z przypisywaniem priorytetów zadaniom, które długo wykonują się na komputerze. Czasy są ponad dwukrotnie dłuższe niż te początkowe. Zaburza to wynik początkowych pomiarów.
+
+\bigskip
+\section{Wnioski}
+\hspace{4ex}Wg slajdów doktora Jelenia, sortowanie przez scalanie (\textit{MergeSort} zyskuje przewagę nad sortowaniem szybkim. Zwykle bierzemy pod uwagę ilości elementów większe od jednego miliona. Niestety, wskutek błędu, którego nie mogłem dopatrzyć się w kodzie kolegi, nie byłem w stanie tego stwierdzić. Wg moich pomiarów, algorytm \textit{QuickSort} jest dużo szybszy od algorytmu \textit{MergeSort}. Jest to również niezależne od ilości danych. Wg literatury oba te algorytmy w przypadku średnim posiadają złożoność obliczeniową rzędu \textit{O($nlogn$)}. Algorytm QuickSort w przypadku pesymistycznym, tj. gdy obierzemy sobie za tzw. \textit{pivot} element maksymalny lub minimalny zbioru ma wtedy złożoność obliczeniową rzędu \textit{O($n^2$)}. Niestety nie byłem w stanie tego sprawdzić, o czym wspomniałem we wstępie tego sprawozdania.
+\end{document}
