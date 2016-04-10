@@ -5,6 +5,8 @@
 #include <sys/time.h>
 #include <ctime>
 #include <typeinfo>
+#include <string>
+#include <fstream>
 #include "IStoper.hh"
 using namespace std;
 
@@ -37,9 +39,25 @@ class TimeCounter : public IStoper
 		}
 	}
 	
-	public : virtual bool DumpToFile()
+	public : virtual bool DumpToFile(std::string file_name)
 	{
-		return false;
+            std::ofstream my_file;  // strumien plikow
+            file_name += ".csv";
+
+            my_file.open(file_name.c_str(), std::fstream::app | std::fstream::out);
+            try {
+              my_file.exceptions(my_file.failbit);
+            }
+            catch(const std::ios_base::failure& ex) {
+              std::cerr << "Error! Couldn't find or open a file" << ex.what()
+                        << std::endl;
+            }
+
+            if (my_file.is_open()) {
+              my_file << GetElapsedTime() << std::endl;
+            }
+            my_file.close();
+            return true;
 	}
 	
 	private : long GetTime()

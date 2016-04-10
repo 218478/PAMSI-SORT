@@ -3,10 +3,13 @@
 #include <fstream>
 #include <cstdlib>
 #include <ctime>
+#include <sstream>
+#include <string>
 #include "ArrayRunner.hh"
 #include "TimeCounter.hh"
 #include "ListTest.hh"
 #include "QuickSortArray.hh"
+#include "MergeSortArray.hh"
 #include "Queue.hh"
 
 using namespace std;
@@ -63,25 +66,40 @@ int main()
 	// //cout << "Runner size: " << runner->GetNumberOfElements() << endl;
 
   Queue<int> data_sizes;
-  QuickSortArray tested_element;
+  QuickSortArray quick_sort_test;
+  MergeSortArray merge_sort_test;
+
   data_sizes.Enqueue(10);
   data_sizes.Enqueue(100);
   data_sizes.Enqueue(1000);
   data_sizes.Enqueue(1000000);  // milion
   data_sizes.Enqueue(1000000000);  // miliard
 
-  data_sizes.ShowQueue();
+  // for debug
+  //  data_sizes.ShowQueue();
 
   TimeCounter *stoper = new TimeCounter();
 
-  
   while (!data_sizes.IsEmpty()) {
+    std::ostringstream ss_quick_sort;
+    std::ostringstream ss_merge_sort;
     int rozmiar = data_sizes.Dequeue();
+
+    // quick sort part
+    ss_quick_sort << "results/QuickSort_" << rozmiar;
     stoper->Start();
-    tested_element.Prepare(rozmiar);
-    tested_element.Run();
+    quick_sort_test.Prepare(rozmiar);
+    quick_sort_test.Run();
     stoper->Stop();
-    std::cout << "Czas dla " << rozmiar << "-elementow to: "
-              << stoper->GetElapsedTime() << std::endl;
-  }
+    stoper->DumpToFile(ss_quick_sort.str());
+
+    // merge sort part
+    ss_merge_sort << "results/MergeSort_" << rozmiar;
+    stoper->Start();
+    merge_sort_test.Prepare(rozmiar);
+    merge_sort_test.Run();
+    stoper->Stop();
+    stoper->DumpToFile(ss_merge_sort.str());
+}
+  return 0;
 }

@@ -4,11 +4,12 @@ __start__: Program
 	./Program 
 
 Program: obj obj/Main.o obj/Array.o obj/TimeCounter.o obj/ArrayRunner.o\
-	 obj/Stack.o obj/Queue.o obj/List.o obj/ListTest.o obj/QuickSortArray.o
+	 obj/Stack.o obj/Queue.o obj/List.o obj/ListTest.o obj/QuickSortArray.o\
+	obj/MergeSortArray.o
 	g++ -g -o Program obj/Main.o obj/TimeCounter.o\
 			obj/ArrayRunner.o obj/Array.o obj/Stack.o\
 			obj/Queue.o obj/List.o obj/ListTest.o\
-			obj/QuickSortArray.o
+			obj/QuickSortArray.o obj/MergeSortArray.o
 
 obj:
 	mkdir obj
@@ -39,6 +40,9 @@ obj/ListTest.o: ListTest.cpp ListTest.hh
 
 obj/QuickSortArray.o: QuickSortArray.cpp QuickSortArray.hh
 	g++ -c -g -o obj/QuickSortArray.o QuickSortArray.cpp
+
+obj/MergeSortArray.o: MergeSortArray.cpp MergeSortArray.hh
+	g++ -c -g -o obj/MergeSortArray.o MergeSortArray.cpp
 
 clean:
 	rm -f obj/*.o Program
